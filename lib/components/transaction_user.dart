@@ -17,7 +17,12 @@ class _TransactionUserState extends State<TransactionUser> {
         title: 'Jaqueta de couro',
         value: 300.50,
         date: DateTime.now()),
-    Transaction(id: 't2', title: 'Boné', value: 70, date: DateTime.now())
+    Transaction(
+      id: 't2',
+      title: 'Boné',
+      value: 70,
+      date: DateTime.now(),
+    )
   ];
 
   _addTransaction(String title, double value) {
