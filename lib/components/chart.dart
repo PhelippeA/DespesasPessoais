@@ -29,7 +29,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   double get _weekTotalValue {
@@ -38,24 +38,28 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    groupedTransactions;
-    return Card(
-      elevation: 6,
-      margin: EdgeInsets.all(20),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: groupedTransactions
-                .map((tr) => Flexible(
-                      fit: FlexFit.tight,
-                      child: Chart_Bar(
-                        label: tr['day'],
-                        value: tr['value'],
-                        percentage: (tr['value'] as double) / _weekTotalValue,
-                      ),
-                    ))
-                .toList()),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Card(
+        elevation: 6,
+        margin: EdgeInsets.all(20),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: groupedTransactions
+                  .map((tr) => Flexible(
+                        fit: FlexFit.tight,
+                        child: Chart_Bar(
+                          label: tr['day'],
+                          value: tr['value'],
+                          percentage: _weekTotalValue == 0
+                              ? 0
+                              : (tr['value'] as double) / _weekTotalValue,
+                        ),
+                      ))
+                  .toList()),
+        ),
       ),
     );
   }
