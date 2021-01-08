@@ -109,12 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text('Despesas Pessoais'),
       actions: <Widget>[
         IconButton(
+          icon: Icon(_showChart ? Icons.list : Icons.show_chart),
+          onPressed: () => setState(() {
+            _showChart = !_showChart;
+          }),
+        ),
+        IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _openTransactionFormModal(context)),
-        if (isLandScape)
-          IconButton(
-              icon: _showChart ? Icon(Icons.list) : Icon(Icons.show_chart),
-              onPressed: () => _openTransactionFormModal(context))
       ],
     );
 
@@ -151,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
             if (!_showChart || !isLandScape)
               Container(
-                height: availableHeight * 0.7,
+                height: availableHeight,
                 child: TransactionList(_transactions, _deleteTransaction),
               ),
           ],

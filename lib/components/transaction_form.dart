@@ -40,57 +40,63 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Título',
-              ),
-            ),
-            TextField(
-              controller: _valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Valor (R\$)',
-              ),
-            ),
-            Container(
-              height: 70,
-              child: Row(children: <Widget>[
-                Expanded(
-                  child: Text(_selectedDate == null
-                      ? 'Nenhuma data selecionada!'
-                      : 'Data selecionada: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}'),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: 10,
+              right: 10,
+              left: 10,
+              bottom: 10 + MediaQuery.of(context).viewInsets.bottom),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _titleController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Título',
                 ),
-                FlatButton(
-                  textColor: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Selecionar data',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextField(
+                controller: _valueController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Valor (R\$)',
+                ),
+              ),
+              Container(
+                height: 70,
+                child: Row(children: <Widget>[
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? 'Nenhuma data selecionada!'
+                        : 'Data selecionada: ${DateFormat('dd/MM/yyyy').format(_selectedDate)}'),
                   ),
-                  onPressed: _showDatePicked,
-                )
-              ]),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                FlatButton(
-                  child: Text('Nova Transação'),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).textTheme.button.color,
-                  onPressed: _submitForm,
-                ),
-              ],
-            )
-          ],
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Selecionar data',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: _showDatePicked,
+                  )
+                ]),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text('Nova Transação'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).textTheme.button.color,
+                    onPressed: _submitForm,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
