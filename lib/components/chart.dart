@@ -50,7 +50,7 @@ class Chart extends StatelessWidget {
               children: groupedTransactions
                   .map((tr) => Flexible(
                         fit: FlexFit.tight,
-                        child: Chart_Bar(
+                        child: ChartBar(
                           label: tr['day'],
                           value: tr['value'],
                           percentage: _weekTotalValue == 0
